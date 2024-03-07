@@ -28,7 +28,7 @@ public class MemberApiController {
      * - API 요청 스펙에 맞추어 별도의 DTO를 파라미터로 받는다.
      */
     @PostMapping("/api/v1/members")
-    public CreateMemberResponse saveMemberV1(@RequestBody @Valid Member member) {
+    public CreateMemberResponse saveMemberV1(@RequestBody @Valid Member member) {// @RequestBody는 JSON을 Member로 넣어준다
         Long id = memberService.join(member);
         return new CreateMemberResponse(id);
     }
@@ -47,7 +47,9 @@ public class MemberApiController {
      * 수정 API
      */
     @PutMapping("/api/v2/members/{id}")
-    public UpdateMemberResponse updateMemberV2(@PathVariable("id") Long id, @RequestBody @Valid UpdateMemberRequest request) {
+    public UpdateMemberResponse updateMemberV2(
+            @PathVariable("id") Long id,
+            @RequestBody @Valid UpdateMemberRequest request) {
         memberService.update(id, request.getName());
         Member findMember = memberService.findOne(id);
         return new UpdateMemberResponse(findMember.getId(), findMember.getName());
@@ -70,13 +72,12 @@ public class MemberApiController {
     public List<Member> membersV1() {
         return memberService.findMembers();
     }
-
     /**
      * 조회 V2: 응답 값으로 엔티티가 아닌 별도의 DTO를 반환한다.
+     * 엔티티의 수정이 "api"의 스펙을 바꿔서는 안된다.
      */
     @GetMapping("/api/v2/members")
     public Result membersV2() {
-
         List<Member> findMembers = memberService.findMembers();
         //엔티티 -> DTO 변환
         List<MemberDto> collect = findMembers.stream()
@@ -85,7 +86,10 @@ public class MemberApiController {
 
         return new Result(collect);
     }
-
+    /**
+     * JSON 응답을 만들때
+     * 객체로 한번 감싸서해야 유지 보수성이 높아진다.
+     * */
     @Data
     @AllArgsConstructor
     static class Result<T> {

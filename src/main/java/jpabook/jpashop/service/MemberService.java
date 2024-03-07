@@ -44,9 +44,14 @@ public class MemberService {
 
     /**
      * 회원 수정
+     * 변경 감지 사용
      */
     @Transactional
     public void update(Long id, String name) {
+        /**
+         * DB에서 멤버 찾아서 영속성에 올리고,
+         * set해주면 변경감지로 수정
+         * */
         Member member = memberRepository.findOne(id);
         member.setName(name);
     }

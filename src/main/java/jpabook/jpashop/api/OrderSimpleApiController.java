@@ -34,7 +34,7 @@ public class OrderSimpleApiController {
     /**
      * V1. 엔티티 직접 노출
      * - Hibernate5Module 모듈 등록, LAZY=null 처리
-     * - 양방향 관계 문제 발생 -> @JsonIgnore
+     * - 양방향 관계 문제 발생 -> @JsonIgnore : 양방향 관계있으면 한쪽에서는 끊어줘야함
      */
     @GetMapping("/api/v1/simple-orders")
     public List<Order> ordersV1() {
@@ -89,6 +89,7 @@ public class OrderSimpleApiController {
         private OrderStatus orderStatus;
         private Address address;
 
+        /** DTO 생성자에서 엔티티와 매핑 */
         public SimpleOrderDto(Order order) {
             orderId = order.getId();
             name = order.getMember().getName();
