@@ -21,32 +21,36 @@ DispatcherServlet은 웹 애플리케이션의 중앙 진입점으로, 모든 �
 
  
 
-HTTP 요청 수신: 클라이언트가 HTTP 요청을 보내면 이 요청은 서블릿 컨테이너(예: Tomcat)로 들어온다. 서블릿 컨테이너는 이 요청을 DispatcherServlet으로 전달한다.
-핸들러 매핑: DispatcherServlet은 요청을 처리할 핸들러(컨트롤러 메서드)를 찾기 위해 HandlerMapping에게 요청을 전달한다. HandlerMapping은 요청 URL, HTTP 메서드, 기타 매핑 정보를 기반으로 적절한 핸들러를 찾는다.
-핸들러 어댑터: DispatcherServlet은 찾은 핸들러를 실행하기 위해 적절한 HandlerAdapter를 사용한다. HandlerAdapter는 실제로 핸들러를 호출하고, 결과를 DispatcherServlet에 반환한다.
-핸들러 실행: HandlerAdapter는 컨트롤러의 메서드를 호출하여 요청을 처리하고, 처리 결과를 반환한다.
+- HTTP 요청 수신: 클라이언트가 HTTP 요청을 보내면 이 요청은 서블릿 컨테이너(예: Tomcat)로 들어온다. 서블릿 컨테이너는 이 요청을 DispatcherServlet으로 전달한다.
+- 핸들러 매핑: DispatcherServlet은 요청을 처리할 핸들러(컨트롤러 메서드)를 찾기 위해 HandlerMapping에게 요청을 전달한다. HandlerMapping은 요청 URL, HTTP 메서드, 기타 매핑 정보를 기반으로 적절한 핸들러를 찾는다.
+- 핸들러 어댑터: DispatcherServlet은 찾은 핸들러를 실행하기 위해 적절한 HandlerAdapter를 사용한다. HandlerAdapter는 실제로 핸들러를 호출하고, 결과를 DispatcherServlet에 반환한다.
+- 핸들러 실행: HandlerAdapter는 컨트롤러의 메서드를 호출하여 요청을 처리하고, 처리 결과를 반환한다.
  
-여기서 말하는 DispatcherServlet은 무엇일까?
- 
-
+## 여기서 말하는 DispatcherServlet은 무엇일까?
  
 
-DispatcherServlet은 Spring MVC에서 프론트 컨트롤러로 작동하는 서블릿이다.
+ 
+
+### DispatcherServlet은 Spring MVC에서 프론트 컨트롤러로 작동하는 서블릿이다.
+![image](https://github.com/user-attachments/assets/fe81e2da-0bfd-4f66-9a17-e2d209fdddbd)
 
 여기서 서블릿이란 자바 기반의 웹 요청 및 응답을 처리하는 서버 측 프로그램이다. 즉 서블릿(Servlet)은 자바 기반의 웹 애플리케이션에서 클라이언트의 요청을 처리하고, 서버 측에서 동적 콘텐츠를 생성하여 응답을 반환하는 자바 프로그램이다. 
 
+![image](https://github.com/user-attachments/assets/2546f50a-68e6-4fc6-a0e6-97022c8dad43)
 
  
 
-다시 DispatcherServlet로 넘어와보면 DispatcherServlet은 Spring MVC에서 프론트 컨트롤러로 작동하는 서블릿으로
-모든 HTTP 요청을 받아서 처리 과정을 조정하는 역할을 한다. 이때 DispatcherServlet을 도와주는 다양한 구성요소가 있는데
+다시 DispatcherServlet로 넘어와보면 DispatcherServlet은 Spring MVC에서 프론트 컨트롤러로 작동하는 서블릿으로  
+모든 HTTP 요청을 받아서 처리 과정을 조정하는 역할을 한다. 이때 DispatcherServlet을 도와주는 다양한 구성요소가 있는데  
+
+
 
 그것들이 바로 HandlerMapping, HandlerAdapte 등이다.
 
 
  
 
-스프링부트기반의 서버 프로그램에 클라이언트가 HTTP 요청을 보내면 DispatcherServlet은 클라이언트의 모든 HTTP 요청을 수신한다. 그후 그 요청을 처리할 핸들러 즉 컨트롤러 메서드를 찾는데, 이때 이용하는 것이 바로 HandlerMapping이다.
+스프링부트기반의 서버 프로그램에 클라이언트가 HTTP 요청을 보내면 DispatcherServlet은 클라이언트의 모든 HTTP 요청을 수신한다. 그후 그 요청을 처리할 핸들러 즉 컨트롤러 메서드를 찾는데, 이때 이용하는 것이 바로 HandlerMapping이다.  
 그 후 HandlerAdapter를 사용하여 적절한 핸들러를 호출하고 요청을 처리한다. 그 후 이제 클라이언트에게 요청을 반환해야하는데 이때 HttpMessageConverter 인터페이스의 구현체를 사용하여 객체를 JSON으로 변환한다. 기본적으로 Jackson 라이브러리를 이용한다.
 
 
@@ -58,12 +62,12 @@ DispatcherServlet은 Spring MVC에서 프론트 컨트롤러로 작동하는 서
 
  
 
-DispatcherServlet 구성요소 각각을 좀 더 깊게 알아보자 !
+### DispatcherServlet 구성요소 각각을 좀 더 깊게 알아보자 !
 
  
  
  
-HandlerMapping
+## HandlerMapping
 먼저 HandlerMapping을 알아보자.
 
 HandlerMapping은 요청 URL과 관련된 핸들러(컨트롤러 메서드)를 매핑하는 역할을 하는 인터페이스이다.
@@ -82,6 +86,8 @@ Spring MVC에서 @RequestMapping 애노테이션 등을 사용하여 매핑 정�
 
 여기서 @RestController 애노테이션이 붙은 클래스의 메서드는 스프링이 HTTP 요청을 처리할 핸들러로 인식하게 해준다.
 
+```
+
 @RestController
 @RequestMapping("/user")
 public class MemberController {
@@ -89,7 +95,7 @@ public class MemberController {
 
 }
  
-
+```
 정확하게 말하면 HandlerMapping는  기본 인터페이스이고 RequestMappingHandlerMapping라는 구현체가 @RequestMapping 애노테이션을 처리하는 기본 구현체이다.
 
  
@@ -149,13 +155,14 @@ public class StudyroomController {
 }
  
 ```
-클라이언트가 /studyroom 경로로 GET 요청을 보냄.
-DispatcherServlet이 요청을 받아 HandlerMapping을 통해 getStudyroomList 메서드를 찾음.
-HandlerAdapter가 메서드를 실행하고, BaseResponse 객체를 반환.
-반환된 객체는 Jackson 라이브러리에 의해 JSON으로 변환되어 HTTP 응답으로 클라이언트에게 전송.
+- 클라이언트가 /studyroom 경로로 GET 요청을 보냄.
+- DispatcherServlet이 요청을 받아 HandlerMapping을 통해 getStudyroomList 메서드를 찾음.
+- HandlerAdapter가 메서드를 실행하고, BaseResponse 객체를 반환.
+- 반환된 객체는 Jackson 라이브러리에 의해 JSON으로 변환되어 HTTP 응답으로 클라이언트에게 전송.
  
 
-Jackson 라이브러리?
+### Jackson 라이브러리?
+![image](https://github.com/user-attachments/assets/f0c8576d-69e5-430f-9641-62e318bde90c)
 
  
 
@@ -166,8 +173,8 @@ Jackson은 Java 객체를 JSON으로 직렬화하거나 JSON을 Java 객체로 �
 Spring MVC에서 주로 @RestController나 @ResponseBody 애노테이션과 함께 사용된다.
 여기서 직렬화, 역직렬화의 개념을 한번 짚고 넘어가 보자!
 
-직렬화: Java 객체를 JSON 문자열로 변환
-역직렬화: JSON 문자열을 Java 객체로 변환
+- 직렬화: Java 객체를 JSON 문자열로 변환
+- 역직렬화: JSON 문자열을 Java 객체로 변환
  
 
  
