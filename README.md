@@ -104,8 +104,8 @@ public class MemberController {
 
  
 
-HandlerMapping 인터페이스: 요청 URL과 관련된 핸들러(컨트롤러 메서드)를 찾는 역할
-RequestMappingHandlerMapping 클래스: HandlerMapping 인터페이스를 구현한 클래스로, @RequestMapping, @GetMapping, @PostMapping 등의 애노테이션을 처리하여 적절한 핸들러를 찾는 역할.
+- HandlerMapping 인터페이스: 요청 URL과 관련된 핸들러(컨트롤러 메서드)를 찾는 역할
+- RequestMappingHandlerMapping 클래스: HandlerMapping 인터페이스를 구현한 클래스로, @RequestMapping, @GetMapping, @PostMapping 등의 애노테이션을 처리하여 적절한 핸들러를 찾는 역할.
  
 
  
@@ -200,9 +200,7 @@ Spring MVC에서 주로 @RestController나 @ResponseBody 애노테이션과 함�
 
 - 핸들러 메서드가 요청을처리하고 생성한 응답을 HandlerAdapter가 DispatcherServlet에게반환
 
-- 생성한 응답은 주로 자바 객체일텐데 이를 HttpMessageConverter 인터페이스의 구현체가 Jackson 라이브러리를이용하여
-
-JSON으로 변환되어 HTTP 응답으로 클라이언트에게 전송.
+- 생성한 응답은 주로 자바 객체일텐데 이를 HttpMessageConverter 인터페이스의 구현체가 Jackson 라이브러리를이용하여 JSON으로 변환되어 HTTP 응답으로 클라이언트에게 전송.
 
 이렇게 이해하면 될 것 같다!!
                       
@@ -210,3 +208,5 @@ JSON으로 변환되어 HTTP 응답으로 클라이언트에게 전송.
 
 
 ## 글 목록
+
+https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/PersistentContext.md
