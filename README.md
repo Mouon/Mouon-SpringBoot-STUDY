@@ -1,4 +1,13 @@
-## JPA 위주의 공부하다가 서블릿까지..
+
+## 글 목록
+
+- [영속성 컨텍스트에 대한](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/PersistentContext.md)
+- [흔한 어노테이션-1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/Anotation.md)
+
+---------------------------
+![image](https://github.com/user-attachments/assets/e53610ea-83b6-4e11-99a0-0843fcaf5a57)
+
+# JPA 위주의 공부하다가 서블릿까지..
 
 
 스프링부트를 이용해서 여러 프로젝트를 진행하던 중 문득 스프링을 처음배울때 크게 중요하게 공부하지않아 잊고있던 
@@ -207,6 +216,3 @@ Spring MVC에서 주로 @RestController나 @ResponseBody 애노테이션과 함�
 --------------------
 
 
-## 글 목록
-
-https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/PersistentContext.md
