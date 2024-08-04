@@ -7,7 +7,7 @@
 - [세터사용 주의](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhyNoSetter.md)
 - [지연로딩과 프록시 그리고 리플렉션](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/LazyloadingNProXy.md)
 - [API 설계에 대한 고민 1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhatRestfulAPI.md)
-- [@Data 사용 지양하기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhyNoSetter.md)
+- [@Async 기본](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/AsyncBacic.md)
 ---------------------------
 ![image](https://github.com/user-attachments/assets/e53610ea-83b6-4e11-99a0-0843fcaf5a57)
 
