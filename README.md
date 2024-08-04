@@ -4,6 +4,8 @@
 - [영속성 컨텍스트에 대한](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/PersistentContext.md)
 - [흔한 어노테이션-1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/Anotation_1.md)
 - [DTO사용하는 이유](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/whySetter.md)
+- [세터사용 주의](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhyNoSetter.md)
+- [@Data 사용 지양하기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhyNoSetter.md)
 ---------------------------
 ![image](https://github.com/user-attachments/assets/e53610ea-83b6-4e11-99a0-0843fcaf5a57)
 

@@ -55,8 +55,8 @@ public class MemberService {
 
 해당 메서드는 @Transactional 어노테이션이 적용되어 있으므로, 메서드 실행이 완료될 때 트랜잭션이 커밋된다.
 
-따라서 join 메서드가 끝날 때 트랜잭션이 커밋되고, 이 때 데이터베이스에 실제로 Member가 저장됩니다.
+따라서 join 메서드가 끝날 때 트랜잭션이 커밋되고, 이 때 데이터베이스에 실제로 Member가 저장된다.
 
-따라서 Member를 저장하고 있는 memberService.join(member) 호출이 바로 트랜잭션이 커밋되는 시점입니다.
+따라서 Member를 저장하고 있는 memberService.join(member) 호출이 바로 트랜잭션이 커밋되는 시점이다.
 
-이 시점에서 데이터베이스에 변경사항이 반영됩니다.
+이 시점에서 데이터베이스에 변경사항이 반영된다.
