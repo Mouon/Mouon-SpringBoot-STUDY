@@ -6,7 +6,7 @@
 불필요한 데이터베이스로의 접근이 다수 발생할 수 있다.
 
 때문에 스프링부트에서는 `@ManyToOne(fetch = LAZY)` 와 같이 지연로딩기능을 애노테이션으로써 구현할 수 있게 지원한다.  
-참고로 fetch의 디폴트 값은 `@xxToOne`ㅠ에서는 EAGER, `@xxToMany` 에서는 LAZY이다.  
+참고로 fetch의 디폴트 값은 `@xxToOne`에서는 EAGER, `@xxToMany` 에서는 LAZY이다.  
 
 ## 그런데 스프링부트는 어떻게 지연로딩을 구현할까?
 ![img.png](img.png)  
