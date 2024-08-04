@@ -67,8 +67,8 @@ fetch = FetchType.LAZY 설정은 User 객체를 가져올 때 orders 리스트�
 ## 간단하게 내부 ORM 프레임워크 구현을 살펴보자!
 
 
-Hibernate와 같은 ORM 프레임워크는 프록시 객체를 사용하여 지연 로딩을 구현합니다. 
-아래는 프록시 객체를 사용한 동작 예시입니다:
+스프링에서는 Hibernate와 같은 ORM 프레임워크는 프록시 객체를 사용하여 지연 로딩을 구현한다. 
+아래는 프록시 객체를 사용한 동작 예시이다.
 ```
     User user = entityManager.find(User.class, userId); // User 객체는 로드됨
     List<Order> orders = user.getOrders(); // 이 시점에 프록시 객체가 작동하여 Order 객체들을 로드함
