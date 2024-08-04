@@ -3,7 +3,7 @@
 
 - [영속성 컨텍스트에 대한](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/PersistentContext.md)
 - [흔한 어노테이션-1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/Anotation_1.md)
-- [DTO사용하는 이유](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/whySetter.md)
+- [DTO사용하는 이유](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/whyDto.md)
 - [세터사용 주의](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhyNoSetter.md)
 - [지연로딩과 프록시 그리고 리플렉션](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/LazyloadingNProXy.md)
 - [API 설계에 대한 고민 1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhatRestfulAPI.md)
