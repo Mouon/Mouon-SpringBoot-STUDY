@@ -6,7 +6,7 @@
 불필요한 데이터베이스로의 접근이 다수 발생할 수 있다.
 
 때문에 스프링부트에서는 `@ManyToOne(fetch = LAZY)` 와 같이 지연로딩기능을 애노테이션으로써 구현할 수 있게 지원한다.  
-참고로 fetch의 디폴트 값은 `@xxToOne`ㅠ에서는 EAGER, `@xxToMany` 에서는 LAZY이다.  
+참고로 fetch의 디폴트 값은 `@xxToOne`에서는 EAGER, `@xxToMany` 에서는 LAZY이다.  
 
 ## 그런데 스프링부트는 어떻게 지연로딩을 구현할까?
 ![img.png](img.png)  
@@ -67,8 +67,8 @@ fetch = FetchType.LAZY 설정은 User 객체를 가져올 때 orders 리스트�
 ## 간단하게 내부 ORM 프레임워크 구현을 살펴보자!
 
 
-Hibernate와 같은 ORM 프레임워크는 프록시 객체를 사용하여 지연 로딩을 구현합니다. 
-아래는 프록시 객체를 사용한 동작 예시입니다:
+스프링에서는 Hibernate와 같은 ORM 프레임워크는 프록시 객체를 사용하여 지연 로딩을 구현한다. 
+아래는 프록시 객체를 사용한 동작 예시이다.
 ```
     User user = entityManager.find(User.class, userId); // User 객체는 로드됨
     List<Order> orders = user.getOrders(); // 이 시점에 프록시 객체가 작동하여 Order 객체들을 로드함
