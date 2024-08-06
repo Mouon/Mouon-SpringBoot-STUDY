@@ -127,7 +127,7 @@ public class MemberController {
 
  
 
-HandlerAdapter
+## HandlerAdapter
 그 다음은 HandlerAdapter이다.
 
 HandlerAdapter는 DispatcherServlet이 요청을 실제 핸들러(컨트롤러 메서드)로 위임하여 처리할 수 있도록 도와주는 어댑터이다. HandlerMapping이 핸들러를 찾아 줬다면 HandlerAdapter는 요청을 찾은 핸들러에게 위임하는 역할을 한다. 그리고 핸들러의 결과를 DispatcherServlet에 반환하는 역할도 한다.
