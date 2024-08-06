@@ -99,7 +99,7 @@ Spring MVC에서 @RequestMapping 애노테이션 등을 사용하여 매핑 정�
 
 여기서 @RestController 애노테이션은 클래스의 메서드를 HTTP 요청을 처리할 핸들러로 인식하게 해준다.
 
-```
+```java
 
 @RestController
 @RequestMapping("/user")
@@ -127,7 +127,7 @@ public class MemberController {
 
  
 
-HandlerAdapter
+## HandlerAdapter
 그 다음은 HandlerAdapter이다.
 
 HandlerAdapter는 DispatcherServlet이 요청을 실제 핸들러(컨트롤러 메서드)로 위임하여 처리할 수 있도록 도와주는 어댑터이다. HandlerMapping이 핸들러를 찾아 줬다면 HandlerAdapter는 요청을 찾은 핸들러에게 위임하는 역할을 한다. 그리고 핸들러의 결과를 DispatcherServlet에 반환하는 역할도 한다.
@@ -146,8 +146,8 @@ Spring MVC에서 자주 사용되는 구현체는 RequestMappingHandlerAdapter�
 
 이제 각 요소들의 실제 스프링에서 작동을 보자 
 
-아래는 단순히 맴버가 속한 스터디룸의 리스트를 반환하는 메서드이다.
-```
+아래는 단순히 맴버가 속한 스터디룸의 리스트를 반환하는 메서드이다.  
+```java
 @RestController
 @Slf4j
 @RequiredArgsConstructor

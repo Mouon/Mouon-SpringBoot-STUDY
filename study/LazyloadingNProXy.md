@@ -28,7 +28,7 @@ JPA 구현체(예: Hibernate)는 리플렉션을 사용하여 클래스 필드�
 
 다시 지연로딩으로 돌아와 보자면 스프링에서 도메인을 설계시 N+1 문제는 다음과 같은 경우 발생할 수있다.
 
-```
+```java
 @Entity
 public class User {
     @Id
@@ -45,8 +45,8 @@ public class User {
 때문에 User 엔티티를 조회하면 연관되어있는 order 리스트가 즉시로드되게된다.  
 
 
-아래와 같이 지연로딩으로 해당 문제를 해결할 수 있다.
-```
+아래와 같이 지연로딩으로 해당 문제를 해결할 수 있다.  
+```java
 @Entity
 public class User {
     @Id
@@ -68,8 +68,8 @@ fetch = FetchType.LAZY 설정은 User 객체를 가져올 때 orders 리스트�
 
 
 스프링에서는 Hibernate와 같은 ORM 프레임워크는 프록시 객체를 사용하여 지연 로딩을 구현한다. 
-아래는 Hibernate에서 프록시 객체를 사용한 지연 로딩 동작 예시이다.
-```
+아래는 Hibernate에서 프록시 객체를 사용한 지연 로딩 동작 예시이다.  
+```java
     User user = entityManager.find(User.class, userId); // User 객체는 로드됨
     List<Order> orders = user.getOrders(); // 이 시점에 프록시 객체가 작동하여 Order 객체들을 로드!!!
 ```

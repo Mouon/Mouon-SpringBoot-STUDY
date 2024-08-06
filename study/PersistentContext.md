@@ -9,7 +9,7 @@
 트랜잭션이 커밋되면 JPA가 영속성 컨텍스트에 있는 엔티티를 데이터베이스에 반영한다.
 
 따라서 Member 엔티티를 영속성 컨텍스트에 저장하면, 해당 엔티티는 트랜잭션이 커밋되는 시점에 데이터베이스에 삽입된다.
-```
+```java
 @Repository
 @RequiredArgsConstructor
 public class MemberRepository {
@@ -30,7 +30,7 @@ public class MemberRepository {
 
 코드상에서 트랜잭션이 커밋되는 경우, 즉 트랜잭션이 끝나는 경우는 아래 코드에서 확인이 가능하다.
 
-```
+```java
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
