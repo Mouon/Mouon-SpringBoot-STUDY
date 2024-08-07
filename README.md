@@ -4,7 +4,7 @@
 - [Querydsl 맛보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/qdslBasic.md)
 - [영속성 컨텍스트에 대한](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/PersistentContext.md)
 - [⭐️@Async 기본⭐️](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/AsyncBacic.md)
-- [⭐️@Async로 Non/Blocking, Synchronous/Asynchronous 짧게 알아보기⭐️](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/AsyncBacic2.md)
+- [⭐️@Async로 Non/Blocking, Synchronous/Asynchronous 짧게 알아보기⭐️](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/AsyncBasic2.md)
 - [흔한 어노테이션-1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/Anotation_1.md)
 - [DTO사용하는 이유](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/whyDto.md)
 - [세터사용 주의](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhyNoSetter.md)
