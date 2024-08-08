@@ -122,7 +122,7 @@ protected void doDispatch(HttpServletRequest request, HttpServletResponse respon
 
 ```
 doDispatch의 전부를 살펴보진 않겠다. 대표적인 것만 보자면  
-`getHandler`를 통해 요청을 처리할 핸들러(컨트롤러)를 찾는다.    
+여기서 `getHandler`를 통해 요청을 처리할 핸들러(컨트롤러)를 찾는다.    
 또한 `getHandlerAdapter`를 통해 핸들러를 실행할 어댑터를 찾는다.  그리고 `ha.handle`를 통해 실제로 핸들러 메서드를 실행한다.  
 여기서 `RequestMappingHandlerAdapter`의 `handle 메서드`가 호출된다.  
 
@@ -236,11 +236,15 @@ at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(Invoca
 ## DataController.getDataList
 ```
 at com.linkode.api_server.controller.DataController.getDataList(DataController.java:47)
-at com.linkode.api_server.service.DataService$$SpringCGLIB$$0.getDataList(<generated>) ~[main/:na]
 ```
 
-컨트롤러의 getDataList 메서드는 서비스 계층의 getDataList 메서드를 호출.  
-서비스 계층의 getDataList 메서드가 호출될때 트랜잭션 관리를 위해 프록시 객체(DataService$$SpringCGLIB$$0)를 생성하여 메소드 호출을 가로챔
+컨트롤러의 getDataList 메서드는 서비스 계층의 getDataList 메서드를 호출.
+
+## DataService.getDataList
+```
+at com.linkode.api_server.service.DataService.getDataList(DataService.java:48)
+```
+- 서비스 계층의 getDataList 메서드가 실제 비즈니스 로직을 처리. 
 
 ## AOP 및 트랜잭션 관리
 ```
