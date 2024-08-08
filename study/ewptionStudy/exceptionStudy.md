@@ -267,6 +267,7 @@ at com.linkode.api_server.service.DataService.getDataList(DataService.java:48) ~
 
 로그의 마지막 부분은 MemberStudyroomException 예외가 발생한 부분. 
 DataService의 getDataList 메서드에서 커스텀된 예외가 발생!!
+
 ---------------------------
 
 # 마무리
