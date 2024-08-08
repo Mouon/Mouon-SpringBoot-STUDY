@@ -28,10 +28,22 @@ at com.linkode.api_server.service.DataService.getDataList(DataService.java:48) ~
 
 ![img.png](img.png)
 ```
+at com.linkode.api_server.service.DataService$$SpringCGLIB$$0.getDataList(<generated>) ~[main/:na]
 at com.linkode.api_server.controller.DataController.getDataList(DataController.java:47) ~[main/:na]
 ```
 컨트롤러 호출 부분이다. DataController.getDataList 메서드를 호출하는 것을 확인 할 수 있다.  
 이 메서드를 통해 서비스 계층인 DataService.getDataList를 호출하는 것을 확인할 수 있다.  
+이때 주목해야하는 점은 `com.linkode.api_server.service.DataService$$SpringCGLIB$$0.getDataList`이 부분이다.  
+이 부분을 보면 `$$SpringCGLIB$$0` 와 같은 특이한 이름을 볼 수 있는데, 이것은  "CGLIB"에서 생성한 프록시 객체임을 나타내는 네이밍 패턴이다.  
+즉, 컨트롤러 메소드가 실행되었고, 이 메소드 내부에서 DataService의 메소드를 호출할 때, 프록시 객체가 대신 호출된 것이다.  
+그 이유는 아마 실제 서비스 계층의 getDataList 메서드에는 `@Transactional`애노테이션이 붙어있기때문에 Spring이 AOP 기능을 적용하기 위함일 것이다.  
+
+#### 정리하자면
+DataService의 getDataList 메소드에 @Transactional 어노테이션이 붙어 있기때문에, 
+Spring은 해당 메소드 호출 시 트랜잭션 관리를 위해 프록시 객체를 생성하여 메소드 호출을 가로채고, 
+이 프록시 객체는 트랜잭션 시작과 종료를 관리하며, 필요한 경우 트랜잭션을 커밋하거나 롤백한다.  
+(때문에 위 로그부터는 AOP 및 트랜잭션 관리에 관한 로그가 발생했던 것이다!! 하나씩 점점 퍼즐이 맞춰지는..!!)
+
 
 ![예외1-4.png](%EC%98%88%EC%99%B81-4.png)  
 ```
@@ -110,7 +122,7 @@ protected void doDispatch(HttpServletRequest request, HttpServletResponse respon
 
 ```
 doDispatch의 전부를 살펴보진 않겠다. 대표적인 것만 보자면  
-여기서 `getHandler`를 통해 요청을 처리할 핸들러(컨트롤러)를 찾는다.    
+`getHandler`를 통해 요청을 처리할 핸들러(컨트롤러)를 찾는다.    
 또한 `getHandlerAdapter`를 통해 핸들러를 실행할 어댑터를 찾는다.  그리고 `ha.handle`를 통해 실제로 핸들러 메서드를 실행한다.  
 여기서 `RequestMappingHandlerAdapter`의 `handle 메서드`가 호출된다.  
 
@@ -209,7 +221,7 @@ at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAd
 at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
 ```
 - RequestMappingHandlerAdapter는 컨트롤러 메서드를 호출하기 위해 적절한 핸들러 메서드를 찾아 실행. 
-- invokeHandlerMethod 메서드는 실제 컨트롤러 메서드를 실행합.
+- invokeHandlerMethod 메서드는 실제 컨트롤러 메서드를 실행함.
 
 ## ServletInvocableHandlerMethod.invokeAndHandle
 ```
@@ -224,15 +236,11 @@ at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(Invoca
 ## DataController.getDataList
 ```
 at com.linkode.api_server.controller.DataController.getDataList(DataController.java:47)
+at com.linkode.api_server.service.DataService$$SpringCGLIB$$0.getDataList(<generated>) ~[main/:na]
 ```
 
-컨트롤러의 getDataList 메서드는 서비스 계층의 getDataList 메서드를 호출.
-
-## DataService.getDataList
-```
-at com.linkode.api_server.service.DataService.getDataList(DataService.java:48)
-```
-- 서비스 계층의 getDataList 메서드가 실제 비즈니스 로직을 처리. 
+컨트롤러의 getDataList 메서드는 서비스 계층의 getDataList 메서드를 호출.  
+서비스 계층의 getDataList 메서드가 호출될때 트랜잭션 관리를 위해 프록시 객체(DataService$$SpringCGLIB$$0)를 생성하여 메소드 호출을 가로챔
 
 ## AOP 및 트랜잭션 관리
 ```
@@ -253,12 +261,13 @@ com.linkode.api_server.common.exception.MemberStudyroomException: 조건에 맞�
 at com.linkode.api_server.service.DataService.getDataList(DataService.java:48) ~[main/:na]
 ```
 
-로그의 마지막 부분은 MemberStudyroomException 예외가 발생한 부분이다. 
-이는 DataService의 getDataList 메서드에서 발생했습니다. 
+로그의 마지막 부분은 MemberStudyroomException 예외가 발생한 부분. 
+DataService의 getDataList 메서드에서 커스텀된 예외가 발생!!
 ---------------------------
 
 # 마무리
-지금까지 통해 로그를 살펴보며 간단하게 스프링의 작동 흐름을 살펴보았습니다!
+지금까지 통해 로그를 살펴보며 간단하게 스프링의 작동 흐름을 살펴보았다!!  
+
 
 
 
