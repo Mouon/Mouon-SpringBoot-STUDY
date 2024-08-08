@@ -254,10 +254,11 @@ at com.linkode.api_server.service.DataService.getDataList(DataService.java:48) ~
 ```
 
 로그의 마지막 부분은 MemberStudyroomException 예외가 발생한 부분이다. 
-이는 DataService의 getDataList 메서드에서 발생했습니다. 
+이는 DataService의 getDataList 메서드에서 발생했다. 
+
 ---------------------------
 
-# 마무리
+# 급하게 마무리
 지금까지 통해 로그를 살펴보며 간단하게 스프링의 작동 흐름을 살펴보았습니다!
 
 
