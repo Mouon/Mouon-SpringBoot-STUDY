@@ -240,7 +240,7 @@ at com.linkode.api_server.controller.DataController.getDataList(DataController.j
 
 컨트롤러의 getDataList 메서드는 서비스 계층의 getDataList 메서드를 호출.
 
-## DataService.getDataList
+## DataService.getDataList ( 프록시 호출 )
 ```
 at com.linkode.api_server.service.DataService$$SpringCGLIB$$0.getDataList(<generated>) ~[main/:na]
 ```
@@ -259,12 +259,12 @@ at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.int
 - AOP는 메서드를 프록시로 감싸서 호출함
 - 트랜잭션 인터셉터는 트랜잭션 경계를 설정하고 커밋 또는 롤백을 처리.
 
-## MemberStudyroomException 예외 발생
+## DataService.getDataList ( 실제 호출 )
 ```
 com.linkode.api_server.common.exception.MemberStudyroomException: 조건에 맞는 멤버_스터디룸을 찾을 수 없습니다.
 at com.linkode.api_server.service.DataService.getDataList(DataService.java:48) ~[main/:na]
 ```
-
+- AOP와 트랜잭션작업이 마무리된 후 프록시 객체가 아닌, 실제 객체의 메서드 호출
 - MemberStudyroomException 예외가 발생한 부분. 
 - DataService의 getDataList 메서드에서 커스텀된 예외가 발생!!
 
