@@ -9,7 +9,7 @@
 - [DTO사용하는 이유](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/whyDto.md)
 - [세터사용 주의](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhyNoSetter.md)
 - [API 설계에 대한 고민 1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhatRestfulAPI.md)
-- [예외로 스프링 작동 흐름 살펴보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/ewptionStudy/exceptionStudy.md)
+- [⚡️예외로 스프링 작동 흐름 살펴보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/ewptionStudy/exceptionStudy.md)
 ---------------------------
 ![image](https://github.com/user-attachments/assets/e53610ea-83b6-4e11-99a0-0843fcaf5a57)
 
@@ -218,6 +218,8 @@ Spring MVC에서 주로 @RestController나 @ResponseBody 애노테이션과 함�
 - 생성한 응답은 주로 자바 객체일텐데 이를 HttpMessageConverter 인터페이스의 구현체가 Jackson 라이브러리를이용하여 JSON으로 변환되어 HTTP 응답으로 클라이언트에게 전송.
 
 이렇게 이해하면 될 것 같다!!
+
+2탄 -> [⚡️예외로 스프링 작동 흐름 살펴보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/ewptionStudy/exceptionStudy.md)
                       
 --------------------
 
