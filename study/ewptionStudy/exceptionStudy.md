@@ -242,9 +242,9 @@ at com.linkode.api_server.controller.DataController.getDataList(DataController.j
 
 ## DataService.getDataList
 ```
-at com.linkode.api_server.service.DataService.getDataList(DataService.java:48)
+at com.linkode.api_server.service.DataService$$SpringCGLIB$$0.getDataList(<generated>) ~[main/:na]
 ```
-- 서비스 계층의 getDataList 메서드가 실제 비즈니스 로직을 처리. 
+- 서비스 계층의 getDataList 메서드가 실제 비즈니스가 아닌 "CGLIB"에서 생성한 프록시 객체가 호출
 
 ## AOP 및 트랜잭션 관리
 ```
@@ -265,8 +265,9 @@ com.linkode.api_server.common.exception.MemberStudyroomException: 조건에 맞�
 at com.linkode.api_server.service.DataService.getDataList(DataService.java:48) ~[main/:na]
 ```
 
-로그의 마지막 부분은 MemberStudyroomException 예외가 발생한 부분. 
-DataService의 getDataList 메서드에서 커스텀된 예외가 발생!!
+- MemberStudyroomException 예외가 발생한 부분. 
+- DataService의 getDataList 메서드에서 커스텀된 예외가 발생!!
+
 ---------------------------
 
 # 마무리
