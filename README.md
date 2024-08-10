@@ -1,5 +1,6 @@
 
 ## 글 목록
+- [🚨JPA SELECT 개선해보기🚨](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/QueryImprove/QueryImprove.md)
 - [⭐️지연로딩과 프록시 그리고 리플렉션⭐️](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/LazyloadingNProXy.md)
 - [Querydsl 맛보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/qdslBasic.md)
 - [영속성 컨텍스트에 대한](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/PersistentContext.md)
