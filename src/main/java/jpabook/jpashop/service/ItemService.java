@@ -3,10 +3,12 @@ package jpabook.jpashop.service;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Transactional(readOnly = true)
@@ -18,6 +20,10 @@ public class ItemService {
     @Transactional
     public void saveItem(Item item) {
         itemRepository.save(item);
+    }
+    @Async
+    public CompletableFuture<String> asyncMethod() {
+        return CompletableFuture.completedFuture("비동기 작업");
     }
 
     @Transactional

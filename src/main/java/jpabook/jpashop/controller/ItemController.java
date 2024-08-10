@@ -6,14 +6,12 @@ import jpabook.jpashop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class ItemController {
 
@@ -24,7 +22,13 @@ public class ItemController {
         model.addAttribute("form", new BookForm());
         return "items/createItemForm";
     }
-
+    @GetMapping("/async")
+    public CompletableFuture<String> asyncCall() throws Exception {
+        return itemService.asyncMethod()
+                .thenApply(result -> {
+                    return result;
+                });
+    }
     @PostMapping("/items/new")
     public String create(BookForm form) {
 
