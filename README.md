@@ -1,5 +1,10 @@
+# 🍃 스프링 부트 공부기록 🍃
+
 
 ## 글 목록
+-----------------------------
+### 🍃스프링 공부 - 원리에 가까운
+
 - [🚨JPA SELECT 개선해보기🚨](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/QueryImprove/QueryImprove.md)
 - [⭐️지연로딩과 프록시 그리고 리플렉션⭐️](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/LazyloadingNProXy.md)
 - [Querydsl 맛보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/qdslBasic.md)
@@ -7,11 +12,17 @@
 - [⭐️@Async 기본⭐️](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/AsyncBacic.md)
 - [⭐️@Async로 Non/Blocking, Synchronous/Asynchronous 짧게 알아보기⭐️](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/AsyncBasic2.md)
 - [흔한 어노테이션-1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/Anotation_1.md)
-- [@Builder로 안정적인 개발하기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/builderPattern/BuilderStuDy.md)
 - [DTO사용하는 이유](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/whyDto.md)
 - [세터사용 주의](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhyNoSetter.md)
-- [API 설계에 대한 고민 1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhatRestfulAPI.md)
 - [⚡️예외로 스프링 작동 흐름 살펴보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/ewptionStudy/exceptionStudy.md)
+- [@Builder로 안정적인 개발하기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/builderPattern/BuilderStuDy.md)
+
+---------------------------
+### 🍃스프링 공부 - 논리에 가까운
+
+- [🗂️파일검증기 만들기 논리](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/fileValidaterStudy/MakeValidater.md)
+- [API 설계에 대한 고민 1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhatRestfulAPI.md)
+
 ---------------------------
 ![image](https://github.com/user-attachments/assets/e53610ea-83b6-4e11-99a0-0843fcaf5a57)
 
