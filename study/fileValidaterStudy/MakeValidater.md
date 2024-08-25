@@ -308,3 +308,6 @@ public UploadDataResponse uploadData(UploadDataRequest request, long memberId) {
 중요한 능력이지않을까 하는 생각을 해볼 수 있었던 좋은 경험이었다!  
 
 
+2탄  
+[파일검증기 예외처리 개선](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/fileValidaterStudy/ImproveFilevalidater.md)  
+
