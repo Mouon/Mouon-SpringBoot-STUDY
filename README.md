@@ -22,6 +22,7 @@
 ### 🍃스프링 공부 - 논리에 가까운
 
 - [🗂️파일검증기 만들기 논리](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/fileValidaterStudy/MakeValidater.md)
+- [파일검증기 예외처리 개선](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/fileValidaterStudy/ImproveFilevalidater.md)  
 - [API 설계에 대한 고민 1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhatRestfulAPI.md)
 
 ---------------------------
