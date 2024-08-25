@@ -307,7 +307,10 @@ public UploadDataResponse uploadData(UploadDataRequest request, long memberId) {
 효율적인 쿼리문 ,유의미한 로그, 유지보수 확장성과 가독성이 좋은 코드도 중요하지만 알고리즘을 공부하듯이 많은 상황을 고민해서 적절한 예외를 발생시켜 클라이언트에게 그 상황을 전파하는 논리력또한 
 중요한 능력이지않을까 하는 생각을 해볼 수 있었던 좋은 경험이었다!  
 
+  
+  
+  
 
-2탄  
+### 2탄  
 [파일검증기 예외처리 개선](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/fileValidaterStudy/ImproveFilevalidater.md)  
 
