@@ -301,6 +301,7 @@ public UploadDataResponse uploadData(UploadDataRequest request, long memberId) {
 
 ```
 
+
 해당메서드는 유저의 정보를 검증하고 검증이 통과했다면 DB에 저장하는 기능을 수행한다.  
 
 이번 기능을 구현하면서 백엔드에서 논리가 중요함을 다시한번 꺠닫게 된 경험이었던 것같다.  
