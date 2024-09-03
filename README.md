@@ -17,6 +17,7 @@
 - [⚡️예외로 스프링 작동 흐름 살펴보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/ewptionStudy/exceptionStudy.md)
 - [@Builder로 안정적인 개발하기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/builderPattern/BuilderStuDy.md)
 - [정적팩토리메소드와 빌드패턴](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/builderPattern/StaticFactory.md)
+- [더티체킹에대한 고민](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/DirtyChecking.md)
 
 ---------------------------
 ### 🍃스프링 공부 - 논리에 가까운
