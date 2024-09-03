@@ -28,5 +28,37 @@
 따라서 고민을 하던중 더티체킹은 "단건 수정"혹은 엔티티 수가 많지 않은 경우에만 사용해야겠다는 결론이 들었다.  
 
   
+### 고민 적용
+
+실제 프로젝트에서 고민을 적용해보았다.  
+아래는 유저가 스터디룸을 삭제하는 기능이다. 스터디룸을 삭제하면 스터디룸 삭제는 물론 관련 데이터까지 모두 삭제가 되어야한다.
+```java
+    @Transactional
+    public void deleteStudyroom(long studyroomId, long memberId) {
+        if (validateMemberRole(studyroomId,memberId,MemberRole.CAPTAIN)) {
+            try {
+                memberstudyroomRepository.deleteMemberStudyroom(studyroomId, BaseStatus.DELETE);
+                dataRepository.updateDataStatus(studyroomId,BaseStatus.DELETE);
+                studyroomRepository.updateStudyroomStatus(studyroomId, BaseStatus.DELETE);
+            }catch (Exception e){
+                //예외처리
+            }
+        } else {
+                //예외처리
+        }
+    }
+```
+
+이 경우에는 모두 벌크 연산을 사용했다. 스터디룸에 업로드된 파일, 스터디원 등은 다수의 업데이트가 필요하다.  
+스터디원을 인원제한으로 그 숫자가 적을 수는 있지만, 업로드된 파일의 경우 수백건을 넘길 수 있다.  
+이경우 JPA를 통해 엔티티를 모두 메모리에 로드한다면 그자체로 메모리에 큰 부담일 것이다.  
+또한 더티체킹을 통해 쿼리가 각각 발생한다면 DB 통신이 다수 발생해 성능상 큰 문제가 생길 것이다.  
+따라서 더티 체킹이 아닌 벌크연산을 선택했다.  
+
+### studyroom은 단건인데?
+
+그렇다, studyroom을 삭제하는것은 단건이다. 하지만 이 경우에는 더티체킹을 위해 스터디룸의 모든 정보를 메모리에 로드하는 것은 메모리와 성능 측면에서 추가적인 리소스를 소모한다고
+ 판단하여 이또한 직접 쿼리를 이용하였다.
+
 개발을 하면 할수록 모든 방법에는 장단점이있고 정답이 없는 고민의 연속인 것같다.  
 이번 고민을 통해 ORM과 영속성 컨텍스트에 관련된 나의 지식의 도구가 한층 더 정리된 것같다.
