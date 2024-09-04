@@ -210,5 +210,36 @@ SELECT 절 최적화를 항상 염두에 두고 작업할 계획이다.
 앞으로도 지속적인 학습과 실험을 통해 더욱 효율적이고 scalable한 시스템을 구축해 나가는 데 노력을 기울일 것이다. 
 이러한 작은 개선들이 모여 결국 큰 차이를 만들어낸다는 것을 이번 경험을 통해 다시 한 번 깨달았다.
 
+### 마지막 고민
 
+그러나 위처럼 쿼리를 작성하면 필요한 값들을 보기위해 레토지토리의 코드를 뜯어봐야한다는 문제가있다. 이는 객체지향
+더 나아가 다른 계층의 신뢰성의 문제도 생긴다.  
+또한 확장성에도 큰 제약이 있어보인다.  
+
+고민을 거듭하고 리펙토링 작업을 다시하면서 위의 기능은 다시 패치조인을 통한 엔티티 캑체 조회로 바꾸었다.  
+클래스기반의 DTO를 매핑한다면 모를까, 해당방법처럼 select해서 row단위로 값을 가져온다면 너무 안정적이지 않은 개발이라고 느껴서이다.  
+
+확실히 DTO를 직접 조회할 수 있는 경우에는 DTO 조회를 통해 쿼리 성능을 개선하면서 개발의 안정성을 해치치 않을 수 있겠지만 그게 아니라면 객체를 조회하는 편이 좋다고 느꼈다(우선 지금은!)  
+아래는 프로젝트에서 작성했던 DTO를 바로 조회하는 경우 일부이다.
+
+```java
+    @Query("SELECT new com.linkode.api_server.dto.studyroom.DataListResponse$Data(d.dataId, d.dataName, d.dataUrl, d.ogTitle, d.ogDescription, d.ogImage, d.ogUrl, d.ogType) " +
+            "FROM Data d WHERE d.studyroom.studyroomId = :studyroomId AND d.dataType = :type AND d.status = :status " +
+            "ORDER BY d.dataId DESC")
+    Optional<List<DataListResponse.Data>> getDataListByType(Long studyroomId, DataType type , BaseStatus status);
+
+```
+
+```java
+    public DataListResponse getDataList(long memberId , long studyroomId, DataType type){
+        log.info("[DataService.getDataList]");
+        //... 검증로직...
+        List<DataListResponse.Data> dataList= dataRepository.getDataListByType(studyroomId,type, BaseStatus.ACTIVE)
+                .orElseThrow(()->new DataException(NOT_FOUND_DATA));
+        return new DataListResponse(dataList);
+    }
+
+```
+
+개발을 하면할수록 정답은 없기떄문에 상황에 맞추어서 방법을 적용하는 것이 중요하다는 것을 느끼고있다.  
 
