@@ -45,20 +45,20 @@ public class DetailStudyroomResponse {
 아래 코드는 스터디룸의 정보와 그 스터디룸에 속한 맴버들의 정보를 가져와 DTO 객체에 저장하는 메서드이다.  
 ```java
 
-public DetailStudyroomResponse getStudyroomDetail(long studyroomId, long memberId) {
-    List<Object[]> results = memberstudyroomRepository.getStudyroomDetail(studyroomId, memberId, BaseStatus.ACTIVE);
+    public DetailStudyroomResponse getStudyroomDetail(long studyroomId, long memberId) {
+        log.info("[MemberStudyroomService.getStudyroomDetail]");
+        MemberStudyroom memberStudyroom = memberstudyroomRepository.getStudyroomDetail(studyroomId,memberId,BaseStatus.ACTIVE)
+                .orElseThrow(()-> new MemberStudyroomException(NOT_FOUND_MEMBER_STUDYROOM));
 
-    if (results.isEmpty()) {
-        throw new MemberStudyroomException(NOT_FOUND_MEMBER_STUDYROOM);
-    }
-    Object[] firstRow = results.get(0);
-    MemberRole role = (MemberRole) firstRow[0];
+        MemberRole role = memberStudyroom.getRole();
+        String studyroomName = memberStudyroom.getStudyroom().getStudyroomName();
+        String studyroomProfile = memberStudyroom.getStudyroom().getStudyroomProfile();
 
     List<DetailStudyroomResponse.Member> members = results.stream()
             .map(row -> new DetailStudyroomResponse.Member(
-                    (Long) row[1],   // memberId
-                    (String) row[2], // nickname
-                    (Long) row[3]    // avatarId
+                    member.getMember().getMemberId(),   // memberId
+                    member.getMember().getNickname(), // nickname
+                    member.getMember().getAvatar().getAvatarId()    // avatarId
             ))
             .collect(Collectors.toList());
 
@@ -95,14 +95,12 @@ public class DetailStudyroomResponse {
         Long memberId;
         String nickname;
         Long avatarId;
-        Long colorId;
 
         @Builder
-        public Member(Long memberId, String nickname, Long avatarId, Long colorId) {
+        public Member(Long memberId, String nickname, Long avatarId) {
             this.memberId = memberId;
             this.nickname = nickname;
             this.avatarId = avatarId;
-            this.colorId = colorId;
         }
     }
 }
@@ -111,23 +109,22 @@ public class DetailStudyroomResponse {
 이제 서비스 계층에 이를 사용해보겠다.  
 
 ```java
-public DetailStudyroomResponse getStudyroomDetail(long studyroomId, long memberId) {
-    List<Object[]> results = memberstudyroomRepository.getStudyroomDetail(studyroomId, memberId, BaseStatus.ACTIVE);
+    public DetailStudyroomResponse getStudyroomDetail(long studyroomId, long memberId) {
+        log.info("[MemberStudyroomService.getStudyroomDetail]");
+        MemberStudyroom memberStudyroom = memberstudyroomRepository.getStudyroomDetail(studyroomId,memberId,BaseStatus.ACTIVE)
+                .orElseThrow(()-> new MemberStudyroomException(NOT_FOUND_MEMBER_STUDYROOM));
 
-    if (results.isEmpty()) {
-        throw new MemberStudyroomException(NOT_FOUND_MEMBER_STUDYROOM);
-    }
-    Object[] firstRow = results.get(0);
-    MemberRole role = (MemberRole) firstRow[0];
+        MemberRole role = memberStudyroom.getRole();
+        String studyroomName = memberStudyroom.getStudyroom().getStudyroomName();
+        String studyroomProfile = memberStudyroom.getStudyroom().getStudyroomProfile();
 
-    List<DetailStudyroomResponse.Member> members = results.stream()
-            .map(row -> DetailStudyroomResponse.Member.builder()
-                    .memberId((Long) row[1])
-                    .nickname((String) row[2])
-                    .avatarId((Long) row[3])
-                    .colorId((Long) row[4])
-                    .build())
-            .collect(Collectors.toList());
+        List<DetailStudyroomResponse.Member> members = memberStudyroom.getStudyroom().getMemberStudyroomList().stream()
+                .map(member -> DetailStudyroomResponse.Member.builder()
+                        .memberId(member.getMember().getMemberId())
+                        .nickname(member.getMember().getNickname())
+                        .avatarId(member.getMember().getAvatar().getAvatarId())
+                        .build())
+                .collect(Collectors.toList());
 
     return DetailStudyroomResponse.builder()
             .role(role)
