@@ -184,6 +184,77 @@ DTO뿐만 아니라 도메인 클래스에도 사용한다면 플젝트의 안�
 
 
 
+# 번외로..
 
+아래는 직접 빌더 패턴을 구현해봤다..!!! 내부 로직을 보면 좀더 이해가 잘될듯!  
+
+
+
+      
+
+```java
+
+package com.linkode.api_server.dto.studyroom;
+
+import com.linkode.api_server.domain.Studyroom;
+import lombok.*;
+
+@Getter
+@NoArgsConstructor
+public class CreateStudyroomResponse {
+
+    private long studyroomId;
+    private String studyroomName;
+    private String studyroomProfile;
+
+//    @Builder
+    public CreateStudyroomResponse(long studyroomId, String studyroomName, String studyroomProfile) {
+        this.studyroomId = studyroomId;
+        this.studyroomName = studyroomName;
+        this.studyroomProfile = studyroomProfile;
+    }
+
+    public static class Builder{
+        private long studyroomId;
+        private String studyroomName;
+        private String studyroomProfile;
+
+        public Builder studyroomId(long studyroomId){
+            this.studyroomId=studyroomId;
+            return this;
+        }
+        public Builder studyroomName(String studyroomName){
+            this.studyroomName=studyroomName;
+            return this;
+        }
+        public Builder studyroomProfile(String studyroomProfile){
+            this.studyroomProfile=studyroomProfile;
+            return this;
+        }
+
+        public CreateStudyroomResponse build() {
+            return new CreateStudyroomResponse(studyroomId, studyroomName, studyroomProfile);
+        }
+
+    }
+
+    public static Builder builder(){
+        return new Builder();
+    }
+
+
+
+
+    public static CreateStudyroomResponse from(Studyroom studyroom){
+        return CreateStudyroomResponse.builder()
+                .studyroomId(studyroom.getStudyroomId())
+                .studyroomName(studyroom.getStudyroomName())
+                .studyroomProfile(studyroom.getStudyroomProfile())
+                .build();
+    }
+}
+
+
+```
 
 
