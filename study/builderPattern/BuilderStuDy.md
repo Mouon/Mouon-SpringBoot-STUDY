@@ -194,11 +194,6 @@ DTO뿐만 아니라 도메인 클래스에도 사용한다면 플젝트의 안�
 
 ```java
 
-package com.linkode.api_server.dto.studyroom;
-
-import com.linkode.api_server.domain.Studyroom;
-import lombok.*;
-
 @Getter
 @NoArgsConstructor
 public class CreateStudyroomResponse {
