@@ -1,9 +1,9 @@
 HELP.md
 .gradle
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**
-!**/src/test/**
+gradle/wrapper/gradle-wrapper.jar
+**/src/main/**
+**/src/test/**
 
 ### STS ###
 .apt_generated
@@ -19,6 +19,9 @@ build/
 *.iws
 *.iml
 *.ipr
+*.gradle
+gradlew.bat
+gradle/wrapper
 out/
 
 ### NetBeans ###
