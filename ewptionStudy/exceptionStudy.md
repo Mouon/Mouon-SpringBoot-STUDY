@@ -11,7 +11,7 @@
 우선 로그 순서는 실제로 예외가 발생한 시점에서 호출 스택을 나타내며, 호출 순서와 반대 순서로 표시된다.
 
 하지만 우리는 로그를 위에서 부터 읽어보겠다! ㅎㅎ  
-![예외1-1.png](%EC%98%88%EC%99%B81-1.png)
+![예외1-1.png](예외1-1.png)
 ```
 com.linkode.api_server.common.exception.MemberStudyroomException: 조건에 맞는 멤버_스터디룸을 찾을 수 없습니다.
 at com.linkode.api_server.service.DataService.getDataList(DataService.java:48) ~[main/:na]
@@ -19,7 +19,7 @@ at com.linkode.api_server.service.DataService.getDataList(DataService.java:48) ~
 먼저 MemberStudyroomException이라는 커스텀 예외이다.  
 두 번째 줄에서 해당 예외가 DataService의 getDataList 메서드에서 발생했음을 알 수 있다.
 
-![예외1-2.png](%EC%98%88%EC%99%B81-2.png)
+![예외1-2.png](예외1-2.png)
 
 다음 부분은 AOP 및 트랜잭션 관리에 관한 부분이다. 하나 하나 살펴보자면  
 - `AopUtils.invokeJoinpointUsingReflection` 이 부분에서 알 수 있듯이 Spring AOP는 메서드를 Reflection을 통해 호출한다.  
@@ -45,7 +45,7 @@ Spring은 해당 메소드 호출 시 트랜잭션 관리를 위해 프록시 �
 (때문에 위 로그부터는 AOP 및 트랜잭션 관리에 관한 로그가 발생했던 것이다!! 하나씩 점점 퍼즐이 맞춰지는..!!)
 
 
-![예외1-4.png](%EC%98%88%EC%99%B81-4.png)  
+![예외1-4.png](예외1-4.png)  
 ```
 at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.6.jar:6.1.6]
 at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.6.jar:6.1.6]

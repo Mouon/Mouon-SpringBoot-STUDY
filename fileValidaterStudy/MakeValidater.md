@@ -205,7 +205,7 @@ validateUrl을 사용하였다.
 
 얼핏보면 잘 작동하는 것같고 응답또한 정상적으로 예외상황에서 예외를 던지는 것 같다.  
 ![img.png](img.png)
-![파일응답.png](%ED%8C%8C%EC%9D%BC%EC%9D%91%EB%8B%B5.png)  
+![파일응답.png](파일응답.png)  
 
 하지만 여기에는 심각한 논리적 허점이있다.  
 그것은 바로 `String dataUrl = s3Uploader.uploadFileToS3(request.getFile(), S3_FOLDER);`이 부분이다.  
