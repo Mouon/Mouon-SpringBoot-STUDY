@@ -151,9 +151,9 @@ public class UserDTO {
 ```
 
 ```java
-QUser user = QUser.user;
-SimpleDTOProjection<UserDTO> projection = SimpleDTOProjection.fields(UserDTO.class, user);
-
+        queryFactory.select(SimpleDTOProjection.fields(UserDTO.class,user))
+        .from(user)
+        .fetch();
 ```
 
 
