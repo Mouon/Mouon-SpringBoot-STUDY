@@ -2,7 +2,7 @@
   
   
 
-![cintribution_list.jpg](cintribution_list.jpg)  
+<img src="cintribution_list.jpg" width="200" height="auto">
 
 최근에 처음으로 오픈소스 프로젝트에 기여하게 되었다.  
 기여한 오픈소스 프로젝트는 [QueryDSL](https://github.com/OpenFeign/querydsl)이라는 라이브러리이고, 
@@ -243,7 +243,9 @@ public class UserDTO {
 
 정말 생각도하지 않았는데,  
 운 좋게도 PR이 승인되었다!!!!! 
-![firstCB.jpg](firstCB.jpg)
+
+  
+<img src="firstCB.jpg" width="500" height="auto">
 
 ###### 이게 무슨일인지...
 
