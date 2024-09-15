@@ -1,14 +1,14 @@
 # 처음으로 오픈소스에 기여한 기록하다! : SimpleDTOProjection 구현  
+
+
   
-  
+이번에 처음으로 오픈소스 프로젝트에 기여하게 되었다. 기여한 오픈소스 프로젝트는 [QueryDSL](https://github.com/OpenFeign/querydsl)이라는 라이브러리인데, 여기서 나는 `SimpleDTOProjection`이라는 기능을 구현하였다.  
 
-![cintribution_list.jpg](cintribution_list.jpg)  
 
-최근에 처음으로 오픈소스 프로젝트에 기여하게 되었다.  
-기여한 오픈소스 프로젝트는 [QueryDSL](https://github.com/OpenFeign/querydsl)이라는 라이브러리이고, 
-해당 오픈소스에서 내가 구현한 기능은 `SimpleDTOProjection`이다.
+<img src="cintribution_list.jpg" alt="contribution_list" width="200" />
 
-솔직히, 이 기능을 개발할 때 오픈소스의 모든 코드들을 명확히 이해하고 작성한 것은 아니었다. (이해하기에 너무 많다.....)   
+
+솔직히.... 이 기능을 구현할 때 QueryDSL 프로젝트의 모든 코드들을 명확히 이해하고 작성한 것은 아니었다.. (이해하기에 너무 많다.....)   
 게다가 Java의 "Reflection" 이라는 기능을 이번에 처음 직접 다루어봤고, 이를 완전히 이해하지 못한 채로 구현에 나섰다... 하하... (마음이 너무 급했다...)  
 처음에는 너무 막막해서 `FactoryExpressionBase`라는 추상 클래스를 참고하며 무작정 따라 쳤다.  
 
@@ -170,10 +170,9 @@ public class UserDTO {
 ### PR 승인
 
 정말 생각도하지 않았는데,  
-운 좋게도 PR이 승인되었다!?!?!?!
-![firstCB.jpg](firstCB.jpg)
+운 좋게도 PR이 승인되었다!?!?!?!  
 
-`velo` 님이 변경 사항을 승인해 주시고, `d64a944` 커밋이 master 브랜치에 병합되었다.  
+<img src="firstCB.jpg" alt="firstCB.jpg" width="500" />
 
 ### 마무리
 
