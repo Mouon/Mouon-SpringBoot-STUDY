@@ -12,12 +12,12 @@
 게다가 Java의 "Reflection" 이라는 기능을 이번에 처음 직접 다루어봤고, 이를 완전히 이해하지 못한 채로 구현에 나섰다... 하하... (마음이 너무 급했다...)  
 처음에는 너무 막막해서 `FactoryExpressionBase`라는 추상 클래스를 참고하며 무작정 따라 쳤다.  
 
-테스트를 만들어 검증을 까지 했지만 만든 코드가 잠재적인 문제없이 작동할지 확신도 없었고,  
+테스트를 만들어 검증까지 했지만 만든 코드가 잠재적인 문제없이 작동할지 확신도 없었고,  
 단지 이런 기능이 있으면 좋겠다는 마음으로 PR을 보냈다...(PR이 거절되어도 누군가는 이런기능을 개발해주면 좋겠다는 마음에..)
 
 ### 구현 배경
 
-QueryDSL에서 Projection을 통해 DTO 생성과 엔티티 필드 매핑을 하는 기존의 방식은 아래처럼 개별 필드를 하나하나 매핑해야 하는 방식이다. 
+QueryDSL에서 Projection을 통해 DTO와 엔티티를 매핑하는 기존의 방식은 아래처럼 개별 필드를 하나하나 명시하여 매핑하는 방식이었다. 
 ```java
 
     queryFactory.select(Projections.constructor(UserDTO.class, user.username, user.email))
@@ -25,8 +25,8 @@ QueryDSL에서 Projection을 통해 DTO 생성과 엔티티 필드 매핑을 하
             .fetch();
 
 ```
-나는 이 방식이 코드를 길어지게 만들어 좀 가독성을 떨어뜨린다고 생각했다.
-따라서 개별 필드를 하나하나 매핑해야 하는 기존의 방식을 자동화하는 방법을 구현해보기로 하였다.  
+나는 이 방식이 코드를 길어지게 만들어 가독성을 떨어뜨린다고 생각했다.  
+따라서 개별 필드를 하나하나 명시하여 매핑해야 하는 기존의 방식을 자동화하는 기능을 구현해보기로하였다.  
 
 ### 기존 코드 구조
 
@@ -35,7 +35,7 @@ QueryDSL의 `FactoryExpression` 인터페이스는 다양한 프로젝션 방식
 이 클래스가 객체를 생성할 수 있는 기본 구조를 제공했기때문에, 
 나는 이를 상속받아 원하는 기능을 구현해 보기로하였다. 
 
-### 구현 내용
+### 구현 내용 ✊🏻
 
 내가 구현한 클래스는 `SimpleDTOProjection` 클래스이다.
 `SimpleDTOProjection` 클래스는 `FactoryExpressionBase`를 확장하여 DTO 객체와 그 필드를 동적으로 생성 및 매핑하는 역할을 한다. 
@@ -142,10 +142,82 @@ public class SimpleDTOProjection<T> extends FactoryExpressionBase<T> {
 
 ```
 
+Projection은 기본적으로 Expression 리스트를 통해 select절을 날린다. 때문에 Expression 리스트가 우선 필요했다.  
+또한 Projection의 주요 목표는 조회 결과를 즉시 DTO와 같은 특정 클래스의 인스턴스로 변환하는 것이기 때문에 
+대상 클래스의 생성자가 필요했다. 이때 이 생성자는 매핑할 클래스에 따라 달라지기 때문에 제네릭 와일드카드 생성자 타입(Constructor<? extends T>)으로 선언해야 했다.
+
+```java
+    private final List<Expression<?>> expressions;  // 매핑할 expression 필드 리스트
+    private final Constructor<? extends T> constructor;  // DTO 생성자
+```
+
+다음으로 `Expression` 리스트를 자동으로 만들어주는 기능이 필요했다.  
+내가 만드는 `SimpleDTOProjection`의 핵심 목표는 DTO의 필드를 자동으로 엔티티객체에서 찾아서 select절을 날리게하는 것이기 떄문이다.  
+이를 위해 `generateExpressions`메서드를 만들었다. 이 메서드는 인자로 `DTO 클래스`와 `EntityPathBase`타입의 엔티티 객체를 받는다.  
+내부에서는 리프렉션의 `getDeclaredFields()`을 이용하여 DTO클래스의 필드를 추출하고 그 다음 필드의 이름을 추출한뒤 
+이를 반복문으로 순회하며 엔티티 객체의 필드중에 DTO클래스의 필드이름과 일치하는 `Expression`타입의 필드만 리스트에 추가한뒤 반환한다. 
+
+```java
+
+    private List<Expression<?>> generateExpressions(Class<? extends T> dtoType, EntityPathBase<?> entity) {
+        List<Expression<?>> expressions = new ArrayList<>();
+        for (Field field : dtoType.getDeclaredFields()) {
+            String fieldName = field.getName();
+            try {
+                Field entityField = entity.getClass().getField(fieldName);
+                if (entityField != null) {
+                    Object value = entityField.get(entity);
+                    if (value instanceof Expression<?>) {
+                        expressions.add((Expression<?>) value);  // 일치하는 필드 추가
+                    }
+                }
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                // 엔티티에 없는 필드는 무시
+            }
+        }
+        return expressions;
+    }
+
+```
+
+그 다음으로는 쿼리결과로 반환할 적절한 생성자를 찾는 메서드를 만들어야했다.  
+때문에 `findMatchingConstructor`라는 메서드를 만들었다. 이 메서드는 DTO 객체를 인자로 받는다. 
+내부적으로는 리플렉션의 `Constructor`를 이용하는데, DTO클래스의 생성자중에서 추출된 `Expression`의 갯수와 일치하는 인자수를 가진 생성자를 찾는다.  
+
+그 이후 `newInstance`라는 메서드를 통해 DTO 인스턴스를 생성하게된다. 이때 `newInstance`는 `(Object... args)`를 통해 가변적으로 인자를 받게되는데  
+이를 통해 쿼리 결과로 얻게된 데이터 값들을 받게된다. (String, Integer, Date 등) 
+
+정리하자면 Expression 리스트는 쿼리 구성과 결과 매핑을 위한 메타데이터로 사용되고, 
+실제 DTO 생성 시에는 쿼리 결과의 실제 데이터 값들이 사용되게된다.
+
+```java
+    // DTO 생성자를 찾는 메서드
+    private Constructor<? extends T> findMatchingConstructor(Class<? extends T> type) {
+        for (Constructor<?> constructor : type.getDeclaredConstructors()) {
+            if (constructor.getParameterTypes().length == expressions.size()) {
+                return (Constructor<? extends T>) constructor;  // 필드 수와 일치하는 생성자 찾기
+            }
+        }
+        throw new RuntimeException("No matching constructor found for " + type.getSimpleName());
+    }
+
+    // 필드를 사용하여 새로운 DTO 인스턴스 생성
+    @Override
+    public T newInstance(Object... args) {
+        try {
+            return constructor.newInstance(args);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create instance of " + getType().getSimpleName(), e);
+        }
+    }
+```
+
+
 ### 사용법
 
 이 클래스를 사용하면 간단하게 DTO와 엔티티를 매핑할 수 있다.  
-예를 들어, 아래와 같이 사용할 수 있다:
+예를 들어, 아래와 같이 사용할 수 있다!!
+
 
 ```java
 public class UserDTO {
@@ -170,14 +242,14 @@ public class UserDTO {
 ### PR 승인
 
 정말 생각도하지 않았는데,  
-운 좋게도 PR이 승인되었다!?!?!?!
+운 좋게도 PR이 승인되었다!!!!! 
 ![firstCB.jpg](firstCB.jpg)
 
-`velo` 님이 변경 사항을 승인해 주시고, `d64a944` 커밋이 master 브랜치에 병합되었다.  
+###### 이게 무슨일인지...
 
 ### 마무리
 
-처음으로 오픈소스에 기여하면서 Reflection이라는 개념을 제대로 이해하지 못한 채로 무작정 구현했지만, 
-Reflection과 QueryDSL의 내부 동작 매커니즘 등 많은것을 배울 수 있었던 좋은 경험이었다.  
+처음으로 오픈소스에 기여하면서 `Reflection`이라는 개념을 제대로 이해하지 못한 채로 무작정 구현했지만, 
+그 과정에서 `Reflection`과 `QueryDSL`의 내부 동작 매커니즘 등 많은것을 배울 수 있었던 좋은 경험이었다.  
 기능이 꼭 승인되지 않더라도 , 이런 기능이 있으면 좋겠다는 생각으로 PR을 보냈었는데,  
 뜻밖에 승인이되어 더 특별한 경험이 된 것 같다 🤩 
