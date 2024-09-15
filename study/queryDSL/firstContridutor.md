@@ -1,4 +1,4 @@
-# 처음으로 오픈소스에 기여한 기록하다! : SimpleDTOProjection 구현  
+# 처음으로 오픈소스에 기여하다! : SimpleDTOProjection 구현  
 
 
   
