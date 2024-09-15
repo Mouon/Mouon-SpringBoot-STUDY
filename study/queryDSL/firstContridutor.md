@@ -1,4 +1,8 @@
-# 처음으로 오픈소스에 기여한 기록하다! : SimpleDTOProjection 구현
+# 처음으로 오픈소스에 기여한 기록하다! : SimpleDTOProjection 구현  
+  
+  
+
+![cintribution_list.jpg](cintribution_list.jpg)  
 
 최근에 처음으로 오픈소스 프로젝트에 기여하게 되었다.  
 기여한 오픈소스 프로젝트는 [QueryDSL](https://github.com/OpenFeign/querydsl)이라는 라이브러리이고, 
