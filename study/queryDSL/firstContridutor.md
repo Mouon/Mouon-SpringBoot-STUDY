@@ -261,6 +261,8 @@ public class UserDTO {
 
 ### 마무리
 
+<img src="distributr.png" width="500" height="auto">
+
 처음으로 오픈소스에 기여하면서 `Reflection`이라는 개념을 제대로 이해하지 못한 채로 무작정 구현했지만, 
 그 과정에서 `Reflection`과 `QueryDSL`의 내부 동작 매커니즘 등 많은것을 배울 수 있었던 좋은 경험이었다.  
 기능이 꼭 승인되지 않더라도 , 이런 기능이 있으면 좋겠다는 생각으로 PR을 보냈었는데,  
