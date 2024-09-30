@@ -21,7 +21,6 @@
 - [🔥🔥Querydsl로 페이징 처리🔥🔥<Querydsl의 강력함>](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/queryDSL/DslPractice.md)
 - [WebClient 맛보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/webClient.md)  
 - [😲 Querydsl 오픈소스 컨트리뷰션이 되다! 😲](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/queryDSL/firstContridutor.md)
-- [🚀 자료실 조회 성능에 인덱싱 ](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/index/Index_Query_1.md)
   
 ---------------------------
 ### 🍃스프링 공부 - 논리에 가까운
