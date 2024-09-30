@@ -55,7 +55,7 @@ WHERE 절에 사용된 컬럼으로 인덱스를 만들어 테스트 해보기�
 문제 해결을 위해 WHERE 절에 사용된 컬럼으로 인덱스를 만들어 보았다:
 
 ```sql
-CREATE INDEX idx_data_studyroom_type_status
+CREATE INDEX idx_data_main
 ON data (studyroom_id, data_type, status);
 
 ```
@@ -101,8 +101,8 @@ limit
 고민 끝에 ORDER BY 절도 인덱스에 포함해야 한다는 것을 깨달았다. 그래서 이번에는 다음과 같이 인덱스를 만들었다:
 
 ```sql
-CREATE INDEX idx_data_studyroom_type_status
-ON data (data_id DESC, studyroom_id, data_type, status);
+CREATE INDEX idx_data_main ON data 
+(studyroom_id, data_type, status, data_id DESC);
 
 ```
 
