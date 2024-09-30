@@ -55,6 +55,7 @@ WHERE 절에 사용된 컬럼으로 인덱스를 만들어 테스트 해보기�
 문제 해결을 위해 WHERE 절에 사용된 컬럼으로 인덱스를 만들어 보았다:
 
 ```sql
+
 CREATE INDEX idx_data_studyroom_type_status
 ON data (studyroom_id, data_type, status);
 
@@ -101,7 +102,7 @@ limit
 고민 끝에 ORDER BY 절도 인덱스에 포함해야 한다는 것을 깨달았다. 그래서 이번에는 다음과 같이 인덱스를 만들었다:
 
 ```sql
-CREATE INDEX idx_data_studyroom_type_status
+CREATE INDEX idx_studyroom_data_status_id
 ON data (data_id DESC, studyroom_id, data_type, status);
 
 ```
@@ -120,12 +121,46 @@ ON data (data_id DESC, studyroom_id, data_type, status);
   
 
   
-
+## 더 나아가서...
 
 나의 개선 과정을 보며 왜 인덱스를 모든 select컬럼 기준으로 안만드냐라는 의문이 생길 수 있다.
 이는 인덱스의 재사용성을 고려한 결정이었다. 모든 SELECT 컬럼을 포함하면 이 특정 쿼리에는 완벽할 수 있지만,  
 인덱스가 너무 특화되어 다른 쿼리에서 활용하기 어려워지고 유지보수 비용도 증가한다.  
 대신 WHERE 절과 ORDER BY에 사용되는 컬럼만으로 인덱스를 구성하면, 다양한 쿼리에서 이 인덱스를 재사용할 수 있다.  
+
+무엇보다 이글에서는 DB 관점에서 자세히 다루지는 않았지만 인덱스를 통한 쿼리튜닝이란 것이  
+단순하게 WHERE 절과 ORDER BY를 고려한다고해서 뜻대로 쿼리가 인덱스를 타지 않을 수 있다.
+DB의 옵티마이저가 효율적인 인덱스를 자동으로 선택하거나, 여러 탐색전략을 자동으로 세우는데,  
+인덱스를 구성하는 컬럼의 순서나 구성요소 등의 영향을 받아 생성한 인덱스를 타지않거나 일부만 타는 일이 발생할 수 있다.  
+
+설명이 어려워질까봐 위에서 소개하지는 않았지만 개선 과정에서 단순 응답시간만을 기준으로 인덱스를 개선한 것은 아니었다.  
+물론 응답시간이 인덱스가 잘못구성 되었음의 중요한 단서이긴하지만 `쿼리 실행계획`을 먼저 살펴보는 것이 좋은 접근 방법일 것이다.  
+실제로 아래의 인덱스에서는 쿼리 실행시 추가적인 `file sort`가 발생하는 비효율적인 면이있었다.
+```sql
+
+CREATE INDEX idx_data_studyroom_type_status
+ON data (studyroom_id, data_type, status);
+
+```
+
+그렇지만 개선을 경험한 아래 인덱스는 쿼리 실행계획을 살펴보았을때 추가적인 작업 없이 100% 인덱스를 활용하고있었다.  
+```sql
+
+CREATE INDEX idx_studyroom_data_status_id
+ON data (data_id DESC, studyroom_id, data_type, status);
+
+```
+![쿼리실행계획.png](%EC%BF%BC%EB%A6%AC%EC%8B%A4%ED%96%89%EA%B3%84%ED%9A%8D.png)
+
+### 스프링에서 인덱스 명시
+
+인덱스를 만들었다면 동료 개발자들이나 미래의 내가 쿼리를 작성할때 인덱스를 염두할 수 있도록 명시해주도록하자! (실제 인덱스는 DB에서 직접만들지만!)  
+```java
+@Table(indexes = {
+    @Index(name = "idx_studyroom_data_status_id", columnList = "studyroom_id, data_type, status, data_id")
+})
+```
+
 
 ## 🚀 결론
 이번 최적화를 통해 무한 스크롤의 성능을 개선할 수 있었다.  
@@ -137,8 +172,10 @@ ORDER BY까지 고려한 인덱스 설계로 만족스러운 성능 향상을 �
 WHERE 절만 고려할 것이 아니라
 ORDER BY, 그리고 더 나아가서 SELECT 목록까지 모두 고려해야 하며,  
 동시에 인덱스의 재사용성도 염두에 두어야 한다.
+또한 쿼리 실행계획을 모니터링하며 인덱스 구성을 조정해야한다.  
 
 이 경험을 통해 인덱스의 위력(?)을 체감할 수 있었던 좋은 경험이었던 것 같다!!!
+다음글에서는 인덱스 자체에 집중하는 기록을 해보아애겠다.
 
 
 
