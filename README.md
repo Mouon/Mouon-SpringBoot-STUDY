@@ -29,7 +29,7 @@
 - [🗂️파일검증기 만들기 논리](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/fileValidaterStudy/MakeValidater.md)
 - [파일검증기 예외처리 개선](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/fileValidaterStudy/ImproveFilevalidater.md)  
 - [API 설계에 대한 고민 1탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/WhatRestfulAPI.md)
-- [🫤 멱등키 기본구현 해보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/tree/master/study)  
+- [🫤 멱등키 기본구현 해보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/IdempotencyKey.md)  
 
 ---------------------------
 ![image](https://github.com/user-attachments/assets/e53610ea-83b6-4e11-99a0-0843fcaf5a57)
