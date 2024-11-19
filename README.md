@@ -21,7 +21,8 @@
 - [🔥🔥Querydsl로 페이징 처리🔥🔥<Querydsl의 강력함>](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/queryDSL/DslPractice.md)
 - [WebClient 맛보기](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/webClient.md)  
 - [😲 Querydsl 오픈소스 컨트리뷰션이 되다! 😲](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/queryDSL/firstContridutor.md)
-- [JPA와 Stream의 조합 예시](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/streamfilter_1.md)  
+- [JPA와 Stream의 조합 예시](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/streamfilter_1.md)
+- [람다사용하면서 느낀 스프링과 차이점](https://github.com/Mouon/Mouon-SpringBoot-STUDY/tree/master/study)  
   
 ---------------------------
 ### 🍃스프링 공부 - 논리에 가까운
