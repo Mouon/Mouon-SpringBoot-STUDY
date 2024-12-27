@@ -24,6 +24,8 @@
 - [JPA와 Stream의 조합 예시](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/streamfilter_1.md)
 - [람다사용하면서 느낀 스프링과 차이점](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/Lambda.md)
 - [비관적 락의 이해(스터디룸 동시 가입 제어하기)](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/Pessimistic_Lock.md)
+- [synchronized에서 분산락까지](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/Redisson.md)  
+
   
   
 ---------------------------
