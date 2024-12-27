@@ -196,4 +196,8 @@ public void joinStudyroom(JoinStudyroomRequest request){
 
 이번 케이스에서는 비관적 락과 synchronized를 함께 사용함으로써 "데이터베이스 레벨의 동시성 제어"와 "비즈니스 로직의 원자성 보장"이라는 두 가지 목표를 모두 달성할 수 있었다.
 
+
+### 찜찜함.. 2탄
+[2탄](https://github.com/Mouon/Mouon-SpringBoot-STUDY/blob/master/study/Redisson.md)  
+
  
