@@ -33,8 +33,8 @@
 ```java
 import com.ilil.alba.domain.QJobPosting;
 import com.ilil.alba.domain.base.BaseStatus;
-import com.ilil.alba.dto.JobPostingSearchRequest;
-import com.ilil.alba.dto.JobPostingSearchResponse;
+import com.ilil.alba.dto.jobPosting.JobPostingSearchRequest;
+import com.ilil.alba.dto.jobPosting.JobPostingSearchResponse;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -45,27 +45,24 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class JobPostingRepository implements JobPostingDslRepository {
+public class JobPostingRepository implements JobPostingDslRepository{
     private final JPAQueryFactory queryFactory;
     QJobPosting jobPosting = QJobPosting.jobPosting;
 
-    public List<JobPostingSearchResponse.SearchResults> searchJobPostings(JobPostingSearchRequest request, Long lastId, int limit) {
+    public List<JobPostingSearchResponse.SearchResults> searchJobPostings(JobPostingSearchRequest request,Long lastId,int limit) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        // 기본적으로 활성화된 공고만 검색
         builder.and(jobPosting.status.eq(BaseStatus.ACTIVE));
 
-        // 커서 기반 페이징을 위한 조건
         if (lastId != null) {
             builder.and(jobPosting.jobPostingId.lt(lastId));
         }
 
-        // 검색 필터 적용
-        if (request.getTitle() != null) {
+        if(request.getTitle() != null){
             builder.and(jobPosting.title.containsIgnoreCase(request.getTitle()));
         }
 
-        if (request.getLocation() != null) {
+        if(request.getLocation() != null){
             builder.and(jobPosting.location.containsIgnoreCase(request.getLocation()));
         }
 
@@ -73,11 +70,10 @@ public class JobPostingRepository implements JobPostingDslRepository {
             builder.and(jobPosting.workDate.eq(request.getWorkDate()));
         }
 
-        if (request.isOneDayJob()) {
-            builder.and(jobPosting.isOneDayJob.isTrue());
+        if (request.getIsOneDayJob() != null) {
+            builder.and(jobPosting.isOneDayJob.eq(request.getIsOneDayJob()));
         }
 
-        // 프로젝션을 활용하여 필요한 데이터만 조회
         var projections = Projections.fields(JobPostingSearchResponse.SearchResults.class,
                 jobPosting.jobPostingId,
                 jobPosting.title,
@@ -94,8 +90,11 @@ public class JobPostingRepository implements JobPostingDslRepository {
                 .orderBy(jobPosting.jobPostingId.desc())
                 .limit(limit)
                 .fetch();
+
     }
+
 }
+
 ```
 
 #### 3.2 QueryDSL을 활용한 동적 쿼리의 장점
