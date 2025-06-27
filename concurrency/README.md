@@ -154,7 +154,8 @@ Caffeine Cache는 현재 가장 우수한 JVM in-process cache로서,
 
 (근데 실무는 거의 MSA 라.. 2차 프로젝트에서 사용하는 분산락과.. DB 수준에서의 트랜잭션 격리가 주요해보인다!)
 
-![짤](./image.png)
+![성동일](https://github.com/user-attachments/assets/b220b8ca-a71e-4236-8cd9-767f1fc14e19)
+
 
 ## 9. 주의점
 - Caffein Cache는 기본적으로 **time-based eviction(시간 기반 만료)** 을 자동으로 수행하지 않는다→ 별도 스케줄러 설정 없으면, cache에 아무 작업이 없을 경우 expired entry가 남아있을 수 있음
@@ -167,7 +168,12 @@ Caffeine Cache는 현재 가장 우수한 JVM in-process cache로서,
 ### 실제 테스트
 캐시의 만료 정책(expireAfterWrite)이 정확히 동작하는지 확인하기 위해, 간단한 테스트 코드를 작성하여 실험을 진행하였다.  
 
-![테스트코드](./테스트 코드.png)
+<img width="960" alt="테스트 코드" src="https://github.com/user-attachments/assets/a5b7bdfa-8e91-480d-9491-0496c83c0677" />  
+
+
+<br>
+
+### 핵심 코드  
 
 ```java
 
@@ -187,7 +193,7 @@ Cache<String, String> cache = Caffeine.newBuilder()
 3. 8초 후 접근
 
 ```java
-// 바로
+        // 바로
         assertEquals(cache.getIfPresent("key1"), "value1");
 
         // 3초 기다리기
@@ -204,7 +210,8 @@ Cache<String, String> cache = Caffeine.newBuilder()
 
 다음은 실제 테스트 결과이다.
 
-![테스트결과](./테스트 결과.png)
+<img width="960" alt="테스트 결과" src="https://github.com/user-attachments/assets/c9b9fbe9-dffd-4276-bbd4-19103684452e" />
+
 
 예상대로 캐시는 5초가 지나기 전까지는 값을 유지하고,
 5초 경과 이후에는 자동으로 만료되어 null이 반환되었다.
