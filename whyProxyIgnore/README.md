@@ -14,6 +14,9 @@
 
 ## private 메서드는 @Transactional 을 붙일 수 없다.
 
+<img width="1280" height="307" alt="image" src="https://github.com/user-attachments/assets/6ace248d-02c0-4be7-8d75-fe2e3e0ae26f" />
+
+
 인텔리제이에서 private 메서드에  @Transactional 을 선언하면 위와 같이 컴파일 에러를 띄워준다. protected 로 선언을 하라는건데..
 우선 이 이유를 알아보자면 스프링 aop에서 프록시는 JDK Dynamic proxy또는 CGLIB으로 작동한다.
 
@@ -38,6 +41,7 @@
 
 그런데 public 이라고 언제나 트랜잭션이 작동하는 것은 아닙니다.
 
+<img width="210" height="210" alt="image" src="https://github.com/user-attachments/assets/81d6d1b1-1ba0-4e11-bc90-5bd0fb75ddcd" />
 
 ## public 메서드인데 트랜잭션이 작동을 안한다..?
 
