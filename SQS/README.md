@@ -192,7 +192,7 @@ Lambda가 Spring API를 호출하려면 토큰을 어떻게 발급하고, 어디
 
 어떤 작업이 끝나면 이벤트를 발행하고, 그 이벤트를 소비하는 쪽에서 후속 처리를 수행하는 방식이다.
 
-<img width="1238" height="336" alt="image" src="https://github.com/user-attachments/assets/05d61828-b196-453c-9fc6-66ae271e9ea2" />
+<img width="1280" height="260" alt="image" src="https://github.com/user-attachments/assets/01d1e8df-a493-4b76-a5e4-6b7ea1ab17ac" />
 
 그렇다면 Lambda의 렌더링 결과도 하나의 이벤트로 바라볼 수 있었다.
 
@@ -206,11 +206,9 @@ Lambda가 Spring API를 호출하려면 토큰을 어떻게 발급하고, 어디
 
 ## 4. Lambda 결과를 SQS에 남기기
 
-<img width="256" height="309" alt="image" src="https://github.com/user-attachments/assets/1438f7fd-0784-448b-8dd8-05bd24ac6390" />
-
 변경된 구조는 다음과 같다.
 
-<img width="1280" height="260" alt="image" src="https://github.com/user-attachments/assets/01d1e8df-a493-4b76-a5e4-6b7ea1ab17ac" />
+<img width="1238" height="336" alt="image" src="https://github.com/user-attachments/assets/05d61828-b196-453c-9fc6-66ae271e9ea2" />
 
 이제 Lambda는 Spring 서버에 직접 API를 호출하지 않는다.
 
