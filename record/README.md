@@ -1,6 +1,6 @@
 <img width="300" height="300" alt="매트 얼빡" src="https://github.com/user-attachments/assets/baff53fd-cdab-4643-8a91-d5a09b250710" />
 
-*일까???????*
+*레코드란???????*
 
 <br><br><br><br><br><br><br><br><br><br>
 
