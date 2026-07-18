@@ -1,7 +1,5 @@
 # **Java Champion Vlad Mihalcea**
 
-!image.png
-
 > AI 시대, 개발자는 무엇을 공부하고 어떤 기술을 선택해야 할까
 > 
 > 
